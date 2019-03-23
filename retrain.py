@@ -232,6 +232,7 @@ def get_image_path(image_lists, label_name, index, image_dir, category):
     tf.logging.fatal('Label %s has no images in the category %s.',
                      label_name, category)
   mod_index = index % len(category_list)
+   
   base_name = category_list[mod_index]
   sub_dir = label_lists['dir']
   full_path = os.path.join(image_dir, sub_dir, base_name)
@@ -239,7 +240,7 @@ def get_image_path(image_lists, label_name, index, image_dir, category):
 
 
 def get_bottleneck_path(image_lists, label_name, index, bottleneck_dir,
-                        category, architecture):
+                         category, architecture):
   """"Returns a path to a bottleneck file for a label at the given index.
 
   Args:
@@ -1145,19 +1146,19 @@ if __name__ == '__main__':
   parser.add_argument(
       '--image_dir',
       type=str,
-      default='',
+      default='D:\\kaggle\\ndsc\\beauty_image.tar\\newf\\',
       help='Path to folders of labeled images.'
   )
   parser.add_argument(
       '--output_graph',
       type=str,
-      default='/tmp/output_graph.pb',
+      default='tmp\\output_graph.pb',
       help='Where to save the trained graph.'
   )
   parser.add_argument(
       '--intermediate_output_graphs_dir',
       type=str,
-      default='/tmp/intermediate_graph/',
+      default='tmp\\intermediate_graph\\',
       help='Where to save the intermediate graphs.'
   )
   parser.add_argument(
@@ -1172,37 +1173,37 @@ if __name__ == '__main__':
   parser.add_argument(
       '--output_labels',
       type=str,
-      default='/tmp/output_labels.txt',
+      default='tmp\\output_labels.txt',
       help='Where to save the trained graph\'s labels.'
   )
   parser.add_argument(
       '--summaries_dir',
       type=str,
-      default='/tmp/retrain_logs',
+      default='tmp\\retrain_logs',
       help='Where to save summary logs for TensorBoard.'
   )
   parser.add_argument(
       '--how_many_training_steps',
       type=int,
-      default=4000,
+      default=50,
       help='How many training steps to run before ending.'
   )
   parser.add_argument(
       '--learning_rate',
       type=float,
-      default=0.01,
+      default=0.004,
       help='How large a learning rate to use when training.'
   )
   parser.add_argument(
       '--testing_percentage',
       type=int,
-      default=10,
+      default=5,
       help='What percentage of images to use as a test set.'
   )
   parser.add_argument(
       '--validation_percentage',
       type=int,
-      default=10,
+      default=15,
       help='What percentage of images to use as a validation set.'
   )
   parser.add_argument(
@@ -1214,7 +1215,7 @@ if __name__ == '__main__':
   parser.add_argument(
       '--train_batch_size',
       type=int,
-      default=100,
+      default=256,
       help='How many images to train on at a time.'
   )
   parser.add_argument(
@@ -1231,7 +1232,7 @@ if __name__ == '__main__':
   parser.add_argument(
       '--validation_batch_size',
       type=int,
-      default=100,
+      default=256,
       help="""\
       How many images to use in an evaluation batch. This validation set is
       used much more often than the test set, and is an early indicator of how
@@ -1252,7 +1253,7 @@ if __name__ == '__main__':
   parser.add_argument(
       '--model_dir',
       type=str,
-      default='/tmp/imagenet',
+      default='tmp/imagenet',
       help="""\
       Path to classify_image_graph_def.pb,
       imagenet_synset_to_human_label_map.txt, and
@@ -1262,7 +1263,7 @@ if __name__ == '__main__':
   parser.add_argument(
       '--bottleneck_dir',
       type=str,
-      default='/tmp/bottleneck',
+      default='tmp/bottleneck',
       help='Path to cache bottleneck layer values as files.'
   )
   parser.add_argument(
@@ -1275,7 +1276,7 @@ if __name__ == '__main__':
   )
   parser.add_argument(
       '--flip_left_right',
-      default=False,
+      default=True,
       help="""\
       Whether to randomly flip half of the training images horizontally.\
       """,
